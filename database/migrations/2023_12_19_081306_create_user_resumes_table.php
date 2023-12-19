@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('user_resumes', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('filename');
+            $table->uuid('user_id');
             $table->boolean('is_open_for_review');
             $table->string('open_review_description')->nullable();
             $table->timestamps();

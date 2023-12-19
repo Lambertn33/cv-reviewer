@@ -27,7 +27,7 @@ class LoginController extends Controller
         }
 
         $request->session()->regenerate();
-        return redirect()->route('resumes.index');
+        return Auth::user()->resume ? redirect()->route('resumes.index') : redirect()->route('resume.upload.create');
     }
 
     public function destroy(Request $request)

@@ -25,9 +25,13 @@
             {{ form.errors.password }}
           </div>
         </div>
-        
-        <div class="mt-4">
+
+        <div class="mt-4 flex flex-col gap-1">
           <button class="btn-primary w-full" type="submit">Login</button>
+          <span class="text-sm flex items-center gap-2"
+            >No Account Yet?
+            <Link :href="route('register.create')" class="text-indigo-600">Register</Link></span
+          >
         </div>
       </div>
     </form>
@@ -35,10 +39,10 @@
 </template>
 
 <script setup>
-import { useForm } from "@inertiajs/vue3";
+import { useForm, Link } from "@inertiajs/vue3";
 const form = useForm({
   email: null,
   password: null,
 });
-const login = () => form.post(route('login.store'));
+const login = () => form.post(route("login.store"));
 </script>

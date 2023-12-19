@@ -16,12 +16,12 @@
           <Link href="">
             {{ user.name }}
           </Link>
-          <Link href="" method="delete" as="button"> Sign out </Link>
+          <Link :href="route('login.destroy', user.id)" method="delete" as="button"> Sign out </Link>
         </div>
         <div v-else>
           <div class="flex gap-4 items-center">
             <Link :href="route('login.create')">Sign In</Link>
-            <Link href="">Sign up</Link>
+            <Link :href="route('register.create')">Sign up</Link>
           </div>
         </div>
       </nav>
