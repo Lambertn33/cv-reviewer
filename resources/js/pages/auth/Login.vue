@@ -3,6 +3,7 @@
     <span class="text-2xl font-bold mb-4">Login to Your Account</span>
     <form @submit.prevent="login" class="w-1/3">
       <div class="my-auto border-gray-200 p-8 border-2 rounded-md">
+        <!--Email-->
         <div>
           <label for="email" class="label">E-mail (username)</label>
           <input id="email" v-model="form.email" type="text" class="input" />
@@ -10,6 +11,8 @@
             {{ form.errors.email }}
           </div>
         </div>
+
+        <!--Password-->
         <div class="mt-4">
           <label for="password" class="label">Password</label>
           <input
@@ -22,6 +25,7 @@
             {{ form.errors.password }}
           </div>
         </div>
+        
         <div class="mt-4">
           <button class="btn-primary w-full" type="submit">Login</button>
         </div>
