@@ -8,6 +8,6 @@ class ResumesController extends Controller
 {
     public function index()
     {
-        return inertia('pages/resumes/Index');
+        return inertia('resumes/Index');
     }
 }
