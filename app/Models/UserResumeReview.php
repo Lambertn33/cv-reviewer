@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Str;
 
 class UserResumeReview extends Model
 {
@@ -38,5 +39,14 @@ class UserResumeReview extends Model
     public function resume(): BelongsTo
     {
         return $this->belongsTo(UserResume::class, 'resume_id', 'id');
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $model->id = Str::uuid()->toString();
+        });
     }
 }
