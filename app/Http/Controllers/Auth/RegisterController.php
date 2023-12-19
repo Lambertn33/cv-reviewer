@@ -23,6 +23,6 @@ class RegisterController extends Controller
             'password' => 'required|min:4|max:9|confirmed'
         ]));
         Auth::login($user);
-        return redirect()->route('resume.upload.create');
+        return redirect()->route('login.create')->with('success', 'Account created successfully');
     }
 }

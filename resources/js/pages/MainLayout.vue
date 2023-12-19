@@ -16,7 +16,13 @@
           <Link href="">
             {{ user.name }}
           </Link>
-          <Link :href="route('login.destroy', user.id)" method="delete" as="button"> Sign out </Link>
+          <Link
+            :href="route('login.destroy', user.id)"
+            method="delete"
+            as="button"
+          >
+            Sign out
+          </Link>
         </div>
         <div v-else>
           <div class="flex gap-4 items-center">
@@ -28,6 +34,12 @@
     </div>
   </header>
   <main class="container mx-auto p-4 w-full">
+    <div
+      v-if="hasSuccess"
+      class="mb-4 border rounded-md shadow-sm border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-900 p-2"
+    >
+      {{ hasSuccess }}
+    </div>
     <slot></slot>
   </main>
 </template>

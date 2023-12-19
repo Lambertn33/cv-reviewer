@@ -32,7 +32,7 @@ class ResumeUploadController extends Controller
                 'is_open_for_review' => $request->reviewable === 'true' ? true : false,
                 'open_review_description' => $request->reviewDescription ?? null
             ]));
-            return redirect()->route('resumes.index')->with('success', 'Account created successfully');
+            return redirect()->route('resumes.index')->with('success', 'Account and resume uploaded created successfully');
         }
     }
 }
