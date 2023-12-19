@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ResumesController;
 
@@ -15,3 +16,4 @@ use App\Http\Controllers\ResumesController;
 */
 
 Route::resource('resumes', ResumesController::class)->only(['index']);
+Route::resource('login', LoginController::class)->only(['create', 'store', 'destroy']);

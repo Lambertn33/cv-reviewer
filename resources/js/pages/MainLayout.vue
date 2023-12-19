@@ -20,7 +20,7 @@
         </div>
         <div v-else>
           <div class="flex gap-4 items-center">
-            <Link href="">Sign In</Link>
+            <Link :href="route('login.create')">Sign In</Link>
             <Link href="">Sign up</Link>
           </div>
         </div>
