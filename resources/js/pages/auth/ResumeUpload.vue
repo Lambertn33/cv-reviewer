@@ -73,7 +73,7 @@
 
   const isResumeReviewable = computed(() => form.reviewable === 'true');
   
-  const login = () => form.post(route("resume.upload.store"));
+  const login = () => form.post(route("user.resume.store"));
   
   const addResume = (event) => (form.resume = event.target.files[0]);
   </script>

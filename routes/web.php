@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResumeUploadController;
+use App\Http\Controllers\ResumeDownloadController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ResumesController;
 
@@ -17,12 +18,13 @@ use App\Http\Controllers\ResumesController;
 |
 */
 
-Route::resource('resumes', ResumesController::class)->only(['index']);
+Route::resource('resumes', ResumesController::class)->only(['index', 'show']);
 Route::resource('login', LoginController::class)->only(['create', 'store', 'destroy']);
 Route::resource('register', RegisterController::class)->only(['create', 'store']);
 
 Route::middleware('auth')->group(function () {
-    Route::prefix('resume/upload')->group(function () {
-        Route::resource('/', ResumeUploadController::class)->names('resume.upload')->only(['create', 'store']);
+    Route::prefix('user/resume')->group(function () {
+        Route::resource('/', ResumeUploadController::class)->names('user.resume')->only(['create', 'store']);
+        Route::get('/viewResume/{resume}', ResumeDownloadController::class)->name('viewResume');
     });
 });
