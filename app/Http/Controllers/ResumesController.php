@@ -10,7 +10,11 @@ class ResumesController extends Controller
 {
     public function index()
     {
-        $resumesForReview = UserResume::with('user')->whereNot('user_id', Auth::user()->id)->where('is_open_for_review', true)->paginate(5);
+        $resumesForReview = UserResume::with('user')
+            ->with('reviews')
+            ->whereNot('user_id', Auth::user()->id)
+            ->where('is_open_for_review', true)->paginate(5);
+
         return inertia('resumes/Index', [
             'resumes' => $resumesForReview
         ]);

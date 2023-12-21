@@ -31,6 +31,9 @@
             <button class="btn-primary">Submit review</button>
           </form>
         </div>
+        <div>
+          <span class="font-bold text-lg">Reviews</span>
+        </div>
       </div>
     </div>
   </div>
