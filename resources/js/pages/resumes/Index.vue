@@ -9,16 +9,25 @@
         v-for="resume in resumes.data"
         :key="resume.id"
       >
-      <ResumeCard
-        :resume="resume"
-        :isLoggedIn="isLoggedIn"
-        :isFormVisible="activeResumeId === resume.id"
-        @toggleReviewForm="toggleReviewForm"
-      />
+        <ResumeCard
+          :resume="resume"
+          :isLoggedIn="isLoggedIn"
+          :isFormVisible="activeResumeId === resume.id"
+          @toggleReviewForm="toggleReviewForm"
+        />
         <!--form to write a review-->
         <div v-if="activeResumeId === resume.id">
-          <form action="" class="flex flex-col gap-4">
-            <textarea cols="10" class="input"></textarea>
+          <form @submit.prevent="reviewResume" class="flex flex-col gap-4">
+            <div class="mb-4">
+              <textarea
+                cols="10"
+                class="input"
+                v-model="form.review"
+              ></textarea>
+              <div v-if="form.errors.review" class="input-error">
+                {{ form.errors.review }}
+              </div>
+            </div>
             <button class="btn-primary">Submit review</button>
           </form>
         </div>
@@ -28,19 +37,37 @@
 </template>
 
 <script setup>
-import { usePage } from "@inertiajs/vue3";
-import { computed, ref } from "vue";
+import { usePage, useForm } from "@inertiajs/vue3";
+import { computed, ref, watch } from "vue";
 import ResumeCard from "../../components/resumes/ResumeCard.vue";
 
 const page = usePage();
 
 const activeResumeId = ref(null);
 
+const form = useForm({
+  review: null,
+  resume_id: activeResumeId ?? null,
+  reviewed_by: page.props.user.id ?? null,
+});
+
+watch(activeResumeId, (newActiveResumeId) => {
+  form.resume_id = newActiveResumeId;
+});
+
 const toggleReviewForm = (resumeId) => {
   activeResumeId.value = activeResumeId.value === resumeId ? null : resumeId;
 };
 
 const isLoggedIn = computed(() => (page.props.user ? true : false));
+
+const reviewResume = () =>
+  form.post(route("user.resume.reviews.store"), {
+    onSuccess: () => {
+      form.reset();
+      activeResumeId.value = null;
+    },
+  });
 
 defineProps({
   resumes: Object,
