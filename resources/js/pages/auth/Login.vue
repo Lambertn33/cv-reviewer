@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col items-center justify-center w-full">
     <span class="text-2xl font-bold mb-4">Login to Your Account</span>
-    <form @submit.prevent="login" class="w-1/3">
+    <form @submit.prevent="login" class="w-full sm:w-2/3 md:w-1/2 lg:w-1/3 xl:w-1/4">
       <div class="my-auto border-gray-200 p-8 border-2 rounded-md">
         <!--Email-->
         <div>
