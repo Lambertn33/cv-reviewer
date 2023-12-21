@@ -12,8 +12,10 @@ class UserResumeReview extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id','resume_id', 'reviewed_by', 'review'
+        'id', 'resume_id', 'reviewed_by', 'review'
     ];
+
+    protected $appends = ['reviewer_names'];
 
     protected $casts = [
         'id' => 'string',
@@ -39,6 +41,11 @@ class UserResumeReview extends Model
     public function resume(): BelongsTo
     {
         return $this->belongsTo(UserResume::class, 'resume_id', 'id');
+    }
+
+    protected function getReviewerNamesAttribute(): string
+    {
+        return $this->reviewer->name;
     }
 
     protected static function boot()

@@ -12,8 +12,11 @@ class ResumesController extends Controller
     {
         $resumesForReview = UserResume::with('user')
             ->with('reviews')
-            ->whereNot('user_id', Auth::user()->id)
-            ->where('is_open_for_review', true)->paginate(5);
+            ->when(Auth::check(), function ($query) {
+                return $query->whereNot('user_id', Auth::user()->id);
+            })
+            ->where('is_open_for_review', true)
+            ->paginate(5);
 
         return inertia('resumes/Index', [
             'resumes' => $resumesForReview
