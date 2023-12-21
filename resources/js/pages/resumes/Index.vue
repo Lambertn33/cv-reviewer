@@ -36,16 +36,20 @@
         <!--reviews-->
         <div>
           <div class="flex items-center gap-2">
-            <span class="font-bold text-lg">Reviews</span>
+            <span class="font-bold text-lg"
+              >Reviews({{ resume.reviews.length }})</span
+            >
             <v-icon
               class="cursor-pointer"
               @click="toggleReviews(resume.id)"
+              v-show="resume.reviews.length"
               v-if="resume.id === activeResumeReviews"
               name="io-chevron-up-outline"
             />
             <v-icon
               class="cursor-pointer"
               @click="toggleReviews(resume.id)"
+              v-show="resume.reviews.length"
               v-else
               name="io-chevron-down-outline"
             />
